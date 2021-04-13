@@ -1,0 +1,41 @@
+<%= flash[:success] %>
+
+<h1>Books</h1>
+<table class="index">
+  <tr class="index-headding">
+    <th class="index-headding-item">Title</th>
+    <th class="index-headding-item">Body</th>
+  </tr>
+  <% @books.each do |book| %>
+    <tr class="index-main">
+      <th class="index-main-item"><%= book.title %></th>
+      <th class="index-main-item"><%= book.body %></th>
+      <th class="index-main-item">
+        <span class="index-main-link"><%= link_to "show", book_path(book) %></span>
+        <span class="index-main-link"><%= link_to "edit", edit_book_path(book) %></span>
+        <span class="index-main-link"><%= link_to "destroy", book_path(book), method: :delete %></span>
+      </th>
+    </tr>
+  <% end %>
+</table>
+
+<div class="new">
+  <h2>New book</h2>
+  <% if @book.errors.any? %>
+    <h3><%= @book.errors.count %> error prohibited this book from being saved:</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with model:@book, local:true do |f| %>
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+
+    <h4>Body</h4>
+    <%= f.text_area :body %>
+
+    <%= f.submit "Create book" %>
+  <% end %>
+</div>

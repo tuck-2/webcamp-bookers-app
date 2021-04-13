@@ -1,0 +1,10 @@
+<%= flash[:success] %>
+<div class="show-main">
+  <p><strong>Title:</strong><%= @book.title %></p>
+  <p><strong>Body:</strong><%= @book.body %></p>
+</div>
+
+<div class="show-link">
+  <%= link_to "edit", edit_book_path(@book) %>
+  <%= link_to "back", books_path %>
+</div>
